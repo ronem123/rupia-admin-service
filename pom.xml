@@ -31,32 +31,90 @@
         <spring-cloud.version>2025.1.0</spring-cloud.version>
     </properties>
     <dependencies>
+
+        <!--====================Spring Start=================-->
+        <!--Spring WEB-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Jakarta validation-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Web client-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--====================Spring End=================-->
+
+        <!--Lombo Boiler plate code generator-->
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!--Map Struct (Class mapper)-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.6.3</version>
         </dependency>
 
-        <!--Eureka-->
+        <!--====================Eureka Discovery Start=================-->
+        <!--Eureka Client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!-- Eureka Discovery for WebClient -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <!--====================Eureka Discovery End=================-->
+
 
     </dependencies>
 
@@ -69,22 +127,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <!--			<dependency>-->
-            <!--				<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--				<artifactId>jackson-databind</artifactId>-->
-            <!--			</dependency>-->
-
-            <!--			<dependency>-->
-            <!--				<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--				<artifactId>jackson-core</artifactId>-->
-            <!--			</dependency>-->
-
-            <!--			<dependency>-->
-            <!--				<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--				<artifactId>jackson-annotations</artifactId>-->
-            <!--			</dependency>-->
-
         </dependencies>
     </dependencyManagement>
 

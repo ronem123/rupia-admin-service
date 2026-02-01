@@ -1,0 +1,18 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8762/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+
+#API base url for Micro services
+services:
+  rupia-auth-service:
+    base-url: http://rupia-auth-service
+  rupia-wallet-service:
+    base-url: http://rupia-wallet-service
+  rupia-transaction-service:
+    base-url: http://rupia-transaction-service
