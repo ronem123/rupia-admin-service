@@ -9,13 +9,18 @@
 
 package com.ronem.adminservice.config;
 
+import io.netty.channel.ChannelOption;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.netty.http.client.HttpClient;
+
+import java.time.Duration;
 
 @Configuration
 public class WebClientConfig {
@@ -34,13 +39,17 @@ public class WebClientConfig {
      * @return
      */
     @Bean("rupia-auth-service")
-    @LoadBalanced
     public WebClient authServiceWebClient(
             //get base url from application.dev|docker.yaml
             @Value("${services.rupia-auth-service.base-url}") String baseUrl,
             WebClient.Builder builder
     ) {
+        HttpClient httpClient = HttpClient.create()
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 3000)   // connection timeout
+                .responseTimeout(Duration.ofSeconds(5));              // response timeout
+
         return builder
+                .clientConnector(new ReactorClientHttpConnector(httpClient))
                 .baseUrl(baseUrl)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();

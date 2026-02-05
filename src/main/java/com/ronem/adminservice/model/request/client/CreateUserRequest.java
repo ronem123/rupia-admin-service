@@ -9,11 +9,14 @@
 
 package com.ronem.adminservice.model.request.client;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Builder
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateUserRequest {
     private String email;
     private String mobileNumber;

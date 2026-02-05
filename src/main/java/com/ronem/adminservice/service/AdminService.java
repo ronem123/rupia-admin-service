@@ -15,4 +15,5 @@ import com.ronem.adminservice.model.response.CreateUserResponse;
 public interface AdminService {
     CreateUserResponse createAdmin(CreateUserRequest request);
 
+    CreateUserResponse approveAdmin(Long userId);
 }

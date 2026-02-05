@@ -12,12 +12,14 @@ package com.ronem.adminservice.service.client;
 import com.ronem.adminservice.model.request.client.CreateUserRequest;
 import com.ronem.adminservice.model.response.ApiResponse;
 import com.ronem.adminservice.model.response.CreateUserResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+@Slf4j
 @Service
 public class AuthClient {
 
@@ -30,7 +32,7 @@ public class AuthClient {
     public ApiResponse<CreateUserResponse> createUser(CreateUserRequest requestBody) {
         return authWebClient
                 .post()
-                .uri("/internal/user")
+                .uri("/auth/internal/user")
                 .bodyValue(requestBody)
                 .retrieve()
                 .onStatus(
@@ -42,6 +44,17 @@ public class AuthClient {
                 .bodyToMono(new ParameterizedTypeReference<ApiResponse<CreateUserResponse>>() {
                 })
                 .block();
+    }
+
+    public ApiResponse<CreateUserResponse> approveAdmin(Long userId) {
+        return authWebClient
+                .put()
+                .uri("/auth/internal/activate/" + userId)
+                .retrieve()
+                .onStatus(HttpStatusCode::isError,
+                        clientResponse -> clientResponse.bodyToMono(String.class).map(RuntimeException::new))
+                .bodyToMono(new ParameterizedTypeReference<ApiResponse<CreateUserResponse>>() {
+                }).block();
     }
 
 }
