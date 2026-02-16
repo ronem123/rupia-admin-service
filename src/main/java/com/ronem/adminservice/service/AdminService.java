@@ -16,4 +16,6 @@ public interface AdminService {
     CreateUserResponse createAdmin(CreateUserRequest request);
 
     CreateUserResponse approveAdmin(Long userId);
+
+    Boolean approveCustomer(Long userId);
 }

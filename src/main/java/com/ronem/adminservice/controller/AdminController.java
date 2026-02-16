@@ -1,10 +1,12 @@
 package com.ronem.adminservice.controller;
 
 import com.ronem.adminservice.model.request.client.CreateUserRequest;
+import com.ronem.adminservice.model.response.ApiResponse;
 import com.ronem.adminservice.model.response.CreateUserResponse;
 import com.ronem.adminservice.service.AdminServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +15,7 @@ import java.util.HashMap;
 
 @Slf4j
 @RestController
-@RequestMapping("/admins")
+@RequestMapping("/admin")
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminServiceImpl adminService;
@@ -38,5 +40,11 @@ public class AdminController {
     ResponseEntity<CreateUserResponse> approveAdmin(@PathVariable Long userId) {
         CreateUserResponse createUserResponse = adminService.approveAdmin(userId);
         return ResponseEntity.status(HttpStatus.OK).body(createUserResponse);
+    }
+
+    @PutMapping("/approve/customer/{userId}")
+    ResponseEntity<ApiResponse<Boolean>> approveCustomer(@PathVariable Long userId) {
+        Boolean activated = adminService.approveCustomer(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(true, "approved", activated));
     }
 }

@@ -55,6 +55,29 @@ public class WebClientConfig {
                 .build();
     }
 
+
+    /**
+     * Bean for CustomerService client, will be used form communication with rupia-customer-service
+     *
+     * @param baseUrl
+     * @return
+     */
+    @Bean("rupia-customer-service")
+    public WebClient customerServiceWebClient(
+            @Value("${services.rupia-customer-service.base-url}") String baseUrl,
+            WebClient.Builder builder
+    ) {
+        HttpClient httpClient = HttpClient.create()
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 3000)   // connection timeout
+                .responseTimeout(Duration.ofSeconds(5));              // response timeout
+
+        return builder
+                .clientConnector(new ReactorClientHttpConnector(httpClient))
+                .baseUrl(baseUrl)
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+    }
+
     /**
      * Bean for WalletService client, will be used form communication with rupia-wallet-service
      *

@@ -29,6 +29,8 @@ public class AuthClient {
         this.authWebClient = authWebClient;
     }
 
+    //create user
+    //calling form admin and customer services
     public ApiResponse<CreateUserResponse> createUser(CreateUserRequest requestBody) {
         return authWebClient
                 .post()
@@ -46,6 +48,8 @@ public class AuthClient {
                 .block();
     }
 
+    //activate admin
+    //calling from admin-service
     public ApiResponse<CreateUserResponse> approveAdmin(Long userId) {
         return authWebClient
                 .put()

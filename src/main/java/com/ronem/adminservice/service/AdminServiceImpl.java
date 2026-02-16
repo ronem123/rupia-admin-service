@@ -9,12 +9,15 @@
 
 package com.ronem.adminservice.service;
 
+import com.ronem.adminservice.exception.AdminServiceException;
 import com.ronem.adminservice.model.request.client.CreateUserRequest;
 import com.ronem.adminservice.model.response.ApiResponse;
 import com.ronem.adminservice.model.response.CreateUserResponse;
 import com.ronem.adminservice.service.client.AuthClient;
+import com.ronem.adminservice.service.client.CustomerClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -22,6 +25,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminServiceImpl implements AdminService {
     private final AuthClient authClient;
+    private final CustomerClient customerClient;
 
 
     @Override
@@ -41,6 +45,16 @@ public class AdminServiceImpl implements AdminService {
             throw new RuntimeException("Cannot approve the user" + response.getMessage());
         }
         return response.getData();
+    }
+
+    //update customer status from KYC_PENDING to ACTIVE once the user verification is done manually
+    @Override
+    public Boolean approveCustomer(Long userId) {
+        ApiResponse<Boolean> response = customerClient.verifyCustomer(userId);
+        if (!response.isSuccess()) {
+            throw new AdminServiceException(HttpStatus.BAD_REQUEST, "Sorry not able to verify the customer");
+        }
+        return true;
     }
 
 
