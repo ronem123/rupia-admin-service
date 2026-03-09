@@ -116,6 +116,12 @@
         <!--====================Eureka Discovery End=================-->
 
 
+        <!--Security library-->
+        <dependency>
+            <groupId>com.ronem.rupia</groupId>
+            <artifactId>rupia-security-lib</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

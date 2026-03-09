@@ -6,7 +6,6 @@ import com.ronem.adminservice.model.response.CreateUserResponse;
 import com.ronem.adminservice.service.AdminServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +17,8 @@ import java.util.HashMap;
 @RequestMapping("/admin")
 @RequiredArgsConstructor
 public class AdminController {
-    private final AdminServiceImpl adminService;
 
+    private final AdminServiceImpl adminService;
     @GetMapping(value = "/greet")
     ResponseEntity<HashMap<String, String>> greet() {
         HashMap<String, String> body = new HashMap<>();
@@ -29,7 +28,7 @@ public class AdminController {
     }
 
 
-    @PostMapping("")
+    @PostMapping("/create")
     ResponseEntity<CreateUserResponse> createAdmin(@RequestBody CreateUserRequest request) {
         log.info("Admin Controller UserRequest body : {}", request);
         CreateUserResponse createUserResponse = adminService.createAdmin(request);
