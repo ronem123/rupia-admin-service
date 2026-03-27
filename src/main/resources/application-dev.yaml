@@ -13,7 +13,7 @@ services:
   rupia-auth-service:
     base-url: http://rupia-auth-service
   rupia-customer-service:
-    base-url: http://rupia-customer-service
+    base-url: http://rupia-customer
   rupia-wallet-service:
     base-url: http://rupia-wallet-service
   rupia-transaction-service:

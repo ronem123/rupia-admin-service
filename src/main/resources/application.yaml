@@ -30,3 +30,8 @@ management:
   endpoint:
     health:
       show-details: always
+
+#Spring Boot automatically reads environment variables.
+jwt:
+  access-secret: ${RUPIA_JWT_SECRET_ACCESS}
+  refresh-secret: ${RUPIA_JWT_SECRET_REFRESH}
